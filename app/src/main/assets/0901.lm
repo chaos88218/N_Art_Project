@@ -1,0 +1,69 @@
+Language model created by QuickLM on Mon Feb  1 08:52:03 EST 2016
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 11 sentences and 13 words
+
+\data\
+ngram 1=13
+ngram 2=22
+ngram 3=11
+
+\1-grams:
+-0.7782 </s> -0.3010
+-0.7782 <s> -0.2218
+-1.8195 ANTERIOR -0.2218
+-1.8195 CONNECT -0.2218
+-1.8195 GLASS -0.2218
+-1.8195 INFERIOR -0.2218
+-1.8195 LEFT -0.2218
+-1.8195 POSTERIOR -0.2218
+-1.8195 REFRESH -0.2218
+-1.8195 RIGHT -0.2218
+-1.8195 SAVE -0.2218
+-1.8195 SHOT -0.2218
+-1.8195 SUPERIOR -0.2218
+
+\2-grams:
+-1.3424 <s> ANTERIOR 0.0000
+-1.3424 <s> CONNECT 0.0000
+-1.3424 <s> GLASS 0.0000
+-1.3424 <s> INFERIOR 0.0000
+-1.3424 <s> LEFT 0.0000
+-1.3424 <s> POSTERIOR 0.0000
+-1.3424 <s> REFRESH 0.0000
+-1.3424 <s> RIGHT 0.0000
+-1.3424 <s> SAVE 0.0000
+-1.3424 <s> SHOT 0.0000
+-1.3424 <s> SUPERIOR 0.0000
+-0.3010 ANTERIOR </s> -0.3010
+-0.3010 CONNECT </s> -0.3010
+-0.3010 GLASS </s> -0.3010
+-0.3010 INFERIOR </s> -0.3010
+-0.3010 LEFT </s> -0.3010
+-0.3010 POSTERIOR </s> -0.3010
+-0.3010 REFRESH </s> -0.3010
+-0.3010 RIGHT </s> -0.3010
+-0.3010 SAVE </s> -0.3010
+-0.3010 SHOT </s> -0.3010
+-0.3010 SUPERIOR </s> -0.3010
+
+\3-grams:
+-0.3010 <s> ANTERIOR </s>
+-0.3010 <s> CONNECT </s>
+-0.3010 <s> GLASS </s>
+-0.3010 <s> INFERIOR </s>
+-0.3010 <s> LEFT </s>
+-0.3010 <s> POSTERIOR </s>
+-0.3010 <s> REFRESH </s>
+-0.3010 <s> RIGHT </s>
+-0.3010 <s> SAVE </s>
+-0.3010 <s> SHOT </s>
+-0.3010 <s> SUPERIOR </s>
+
+\end\
