@@ -17,7 +17,6 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by miles on 2015/11/17.
  */
 public class Model {
-    private FileReader fileReader;
 
     protected FloatBuffer vertexBuffer;
     protected FloatBuffer colorBuffer;
@@ -31,12 +30,12 @@ public class Model {
     private boolean Loaded = false;
 
     public Model(String string, float alpha) {
-        fileReader = new FileReader();
+        FileReader fileReader = new FileReader();
         vertex = fileReader.ReadStlBinary(string);
 
         if(!Float.isNaN(vertex[0])) {
             float[] normals = VectorCal.getNormByPtArray(vertex);
-            setColor(new float[]{0.5f, 0.5f, 0.5f}, alpha);
+            setColor(new float[]{1.0f, 1.0f, 1.0f}, alpha);
             Log.v(string + " loaded: ", "Loaded");
             Loaded = true;
 
@@ -56,12 +55,12 @@ public class Model {
     protected void setColor(float[] in_color, float alpha){
         in_color = new float[]{in_color[0], in_color[1], in_color[2], alpha};
         color = new float[vertex.length/3*4];
-        for(int i = 0; i < color.length/4 ; i++)
-        {
-            for(int j = 0; j < 4; j++){
-                color[i+j] = in_color[j];
-            }
+
+        for (int i = 0; i < color.length; i++) {
+            color[i] = in_color[i % 4];
+
         }
+
         colorBuffer = RenderUtils.buildFloatBuffer(color);
     }
 

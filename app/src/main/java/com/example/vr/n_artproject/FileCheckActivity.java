@@ -139,9 +139,9 @@ public class FileCheckActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
                 final View item = LayoutInflater.from(FileCheckActivity.this).inflate(R.layout.downlaod_ip_dlg, null);
                 new AlertDialog.Builder(FileCheckActivity.this)
-                        .setTitle("Enter Download address")
+                        .setTitle("Enter IP address")
                         .setView(item)
-                        .setPositiveButton("Confirm IP", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 EditText editText = (EditText) item.findViewById(R.id.download_ip_text);
@@ -246,7 +246,7 @@ public class FileCheckActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         try {
             startActivityForResult(
-                    Intent.createChooser(intent, "Select a File to Upload"), i);
+                    Intent.createChooser(intent, "File Chooser"), i);
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
         }

@@ -1,5 +1,9 @@
 package com.example.vr.n_artproject.Models;
 
+import android.util.Log;
+
+import com.example.vr.n_artproject.LoaderNCalculater.VectorCal;
+
 import javax.microedition.khronos.opengles.GL10;
 
 /**
@@ -10,12 +14,19 @@ public class OSP extends Model {
     //mean position for model viewing
     public float[] mean_position = new float[]{0, 0, 0};
 
+    public float[] rotation_vector = new float[]{1, 0, 0};
+    public float normal_angle = 0;
+
     public OSP(String string, float[] in_color, float alpha) {
         super(string, alpha);
         setColor(in_color, alpha);
+        if (isLoaded()) {
+            calculateMean();
+            calculateAngle();
+        }
     }
 
-    public void calculateMean() {
+    private void calculateMean() {
         mean_position = new float[]{0, 0, 0};
         for (int k = 0; k < this.vertex.length; k++) {
             mean_position[k % 3] += this.vertex[k];
@@ -23,6 +34,19 @@ public class OSP extends Model {
         for (int i = 0; i < 3; i++) {
             mean_position[i] /= (this.vertex.length / 3.0);
         }
+    }
+
+    private void calculateAngle() {
+        float[] normal_vector = VectorCal.getNormByPtArray(this.vertex);
+        normal_vector = new float[]{normal_vector[0], normal_vector[1], normal_vector[2]};
+        if (normal_vector[0] < 0) {
+            for (int i = 0; i < 3; i++) {
+                normal_vector[i] = -normal_vector[i];
+            }
+        }
+
+        normal_angle = (float) Math.acos((double) VectorCal.dot(normal_vector, new float[]{1.0f, 0.0f, 0.0f})) * 180f / 3.1415926f;
+        rotation_vector = VectorCal.cross(normal_vector, new float[]{1.0f, 0.0f, 0.0f});
     }
 
     @Override

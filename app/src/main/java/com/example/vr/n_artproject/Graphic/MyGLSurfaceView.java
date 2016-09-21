@@ -19,7 +19,6 @@ public class MyGLSurfaceView extends GLSurfaceView {
     }
 
 
-    private final float TOUCH_SCALE_FACTOR = (float) (180.0f / Math.PI);
     private float mPreviousX;
     private float mPreviousY;
 
@@ -34,8 +33,9 @@ public class MyGLSurfaceView extends GLSurfaceView {
                 float dx = (x - mPreviousX)* 2 / getWidth();
                 float dy = (y - mPreviousY)* 2 / getHeight();
 
-                mRenderer.setAngleY(mRenderer.getAngleY() + dx * TOUCH_SCALE_FACTOR);
-                mRenderer.setAngleX(mRenderer.getAngleX() + dy * TOUCH_SCALE_FACTOR);
+                float TOUCH_SCALE_FACTOR = (float) (180.0f / Math.PI);
+                mRenderer.setAngleY(dx * TOUCH_SCALE_FACTOR);
+                mRenderer.setAngleX(dy * TOUCH_SCALE_FACTOR);
             }break;
 
         }

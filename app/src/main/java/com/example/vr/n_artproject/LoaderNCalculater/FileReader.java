@@ -89,7 +89,7 @@ public class FileReader {
     //STL binary reader
     public float[] ReadStlBinary(String fileName) {
         float[] ospVert = new float[0];
-        File file = new File("/sdcard/" + fileName);
+        File file = new File(fileName);
         InputStream inputStream = null;
 
         try {

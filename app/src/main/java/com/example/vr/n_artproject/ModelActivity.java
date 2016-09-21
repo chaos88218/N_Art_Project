@@ -2,6 +2,7 @@ package com.example.vr.n_artproject;
 
 import android.graphics.Bitmap;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -55,15 +56,18 @@ public class ModelActivity extends AppCompatActivity {
     //Numbers and data
     public String[] fileNames;
     public static Bitmap glShotbitmap;
-    public float[] matrix1;
-    public float[] matrix2;
+    public static float[] matrix1 = new float[16];
+    public static float[] matrix2 = new float[16];
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Bundle bundle = this.getIntent().getExtras();
         fileNames = bundle.getStringArray("FILE_NAME");
+        Matrix.setIdentityM(matrix1, 0);
+        Matrix.setIdentityM(matrix2, 0);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

@@ -24,7 +24,7 @@
             android:text="Skull Model"
             android:id="@+id/skull_check_text"
             android:textColor="#ff000d"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:text="Maxilla Model"
             android:id="@+id/maxi_check_text"
             android:textColor="#ff000d"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             android:text="Mandible Model"
             android:id="@+id/mand_check_text"
             android:textColor="#ff000d"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
             android:text="Maxilla OS Plane"
             android:id="@+id/osp1_check_text"
             android:textColor="#ff000d"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
             android:text="Mandible OS Plane"
             android:id="@+id/osp2_check_text"
             android:textColor="#ff000d"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
             android:text="N-Art Project"
             android:id="@+id/project_check_text"
             android:textColor="#ff000d"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
             android:text="AR Marker Points"
             android:id="@+id/ar_check_text"
             android:textColor="#ff000d"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -100,9 +100,6 @@
                         android:layout_height="40dp"
                         android:text="VSCM"
                         android:id="@+id/stc_radButton"
-                        android:layout_below="@+id/linearLayout3"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
                         android:checked="true"
                         android:textColor="#ff0000"/>
 
@@ -151,9 +148,6 @@
             android:layout_height="50dp"
             android:text="Launch"
             android:id="@+id/launch_button"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_weight="0.9" />
 
         <ImageButton
@@ -161,8 +155,6 @@
             android:layout_height="50dp"
             android:id="@+id/download_button"
             android:src="@android:drawable/stat_sys_download"
-            android:layout_above="@+id/launch_button"
-            android:layout_alignParentStart="true"
             android:layout_weight="0.1" />
     </LinearLayout>
 
