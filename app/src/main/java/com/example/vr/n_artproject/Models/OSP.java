@@ -1,8 +1,13 @@
 package com.example.vr.n_artproject.Models;
 
+import android.opengl.GLES10;
 import android.util.Log;
 
 import com.example.vr.n_artproject.LoaderNCalculater.VectorCal;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -11,9 +16,10 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class OSP extends Model {
 
+    BorderLines borderLines;
+
     //mean position for model viewing
     public float[] mean_position = new float[]{0, 0, 0};
-
     public float[] rotation_vector = new float[]{1, 0, 0};
     public float normal_angle = 0;
 
@@ -21,6 +27,7 @@ public class OSP extends Model {
         super(string, alpha);
         setColor(in_color, alpha);
         if (isLoaded()) {
+            borderLines = new BorderLines(this.vertex, in_color);
             calculateMean();
             calculateAngle();
         }
@@ -56,6 +63,9 @@ public class OSP extends Model {
 
     @Override
     public void draw(GL10 gl) {
+        GLES10.glEnable(GLES10.GL_BLEND);
+        GLES10.glBlendFunc(GLES10.GL_SRC_ALPHA, GLES10.GL_ONE_MINUS_SRC_ALPHA);
+
         gl.glColorPointer(4, GL10.GL_FLOAT, 0, this.colorBuffer);
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0, this.vertexBuffer);
 
@@ -68,5 +78,10 @@ public class OSP extends Model {
 
         gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
         gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+
+        GLES10.glDisable(GLES10.GL_BLEND);
+
+
+        borderLines.draw(gl);
     }
 }

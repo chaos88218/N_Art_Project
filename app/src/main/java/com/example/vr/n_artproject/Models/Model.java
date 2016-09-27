@@ -1,7 +1,5 @@
 package com.example.vr.n_artproject.Models;
 
-import android.opengl.GLES20;
-import android.opengl.GLES32;
 import android.util.Log;
 
 import com.example.vr.n_artproject.LoaderNCalculater.FileReader;
@@ -18,12 +16,12 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class Model {
 
-    protected FloatBuffer vertexBuffer;
-    protected FloatBuffer colorBuffer;
+    FloatBuffer vertexBuffer;
+    FloatBuffer colorBuffer;
     private FloatBuffer normalBuffer;
 
     //STL and render data
-    protected float[] vertex;
+    float[] vertex;
     private float color[];
 
     //Loaded flag

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Skull Model"
+            android:text="1. Skull Model"
             android:id="@+id/skull_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Maxilla Model"
+            android:text="2. Maxilla Model"
             android:id="@+id/maxi_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mandible Model"
+            android:text="3. Mandible Model"
             android:id="@+id/mand_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -45,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Maxilla OS Plane"
+            android:text="4. Maxilla OSP"
             android:id="@+id/osp1_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mandible OS Plane"
+            android:text="5. Mandible OSP"
             android:id="@+id/osp2_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -61,7 +61,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="N-Art Project"
+            android:text="6. N-Art Project"
             android:id="@+id/project_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -69,8 +69,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AR Marker Points"
+            android:text="7. AR Marker Points"
             android:id="@+id/ar_check_text"
+            android:textColor="#ff000d"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8. Poor Points"
+            android:id="@+id/poor_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
 
@@ -98,7 +106,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:text="VSCM"
+                        android:text="9. VSCM"
                         android:id="@+id/stc_radButton"
                         android:checked="true"
                         android:textColor="#ff0000"/>
@@ -106,7 +114,7 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:text="ARToolkit calibration"
+                        android:text="10. ARToolkit calibration"
                         android:id="@+id/arc_radButton"
                         android:checked="false"
                         android:textColor="#ff0000"/>

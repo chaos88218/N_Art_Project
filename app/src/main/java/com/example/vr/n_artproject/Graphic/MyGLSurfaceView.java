@@ -44,5 +44,17 @@ public class MyGLSurfaceView extends GLSurfaceView {
         return true;
     }
 
+    public void setAngleX(float angle){
+        mRenderer.setAngleX(angle);
+    }
+
+    public void setAngleY(float angle){
+        mRenderer.setAngleY(angle);
+    }
+
+    public void setSnap(boolean in_snap){mRenderer.Snap = in_snap;}
+
+    public void setSnaped(boolean in_snap){mRenderer.Snaped = in_snap;}
+    public boolean getSnaped(){ return mRenderer.Snaped;}
 
 }

@@ -47,6 +47,7 @@ public class FileCheckActivity extends AppCompatActivity {
     TextView osp2_check;
     TextView project_check;
     TextView arMarker_check;
+    TextView poor_check;
 
     RadioButton STC_check;
     RadioButton ARC_check;
@@ -66,13 +67,14 @@ public class FileCheckActivity extends AppCompatActivity {
             root_path + "skull.stl", root_path + "maxilla.stl",
             root_path + "mandible.stl", root_path + "max_OSP.stl",
             root_path + "man_OSP.stl", root_path + "arproject.txt",
-            root_path + "arpoints.txt", root_path + "HECmatrix.txt",
-            root_path + "optical_param_left.dat"};
+            root_path + "arpoints.txt", root_path + "poor.txt"
+            , root_path + "HECmatrix.txt", root_path + "optical_param_left.dat"};
     boolean[] check = new boolean[]{
             false, false,
             false, false,
             false, false,
-            false, false, false};
+            false, false,
+            false, false};
     TextView[] set_view;
 
     @Override
@@ -94,6 +96,7 @@ public class FileCheckActivity extends AppCompatActivity {
         osp2_check = (TextView) findViewById(R.id.osp2_check_text);
         project_check = (TextView) findViewById(R.id.project_check_text);
         arMarker_check = (TextView) findViewById(R.id.ar_check_text);
+        poor_check = (TextView) findViewById(R.id.poor_check_text);
 
         STC_check = (RadioButton) findViewById(R.id.stc_radButton);
         ARC_check = (RadioButton) findViewById(R.id.arc_radButton);
@@ -102,11 +105,11 @@ public class FileCheckActivity extends AppCompatActivity {
                 skull_check, maxiila_check,
                 mandible_check, osp1_check,
                 osp2_check, project_check,
-                arMarker_check, STC_check,
-                ARC_check
+                arMarker_check, poor_check,
+                STC_check, ARC_check
         };
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             final int finalI = i;
             set_view[i].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,7 +122,7 @@ public class FileCheckActivity extends AppCompatActivity {
         vSCM_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                file_path_chooser(7);
+                file_path_chooser(8);
             }
         });
 
@@ -127,7 +130,7 @@ public class FileCheckActivity extends AppCompatActivity {
         aRC_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                file_path_chooser(8);
+                file_path_chooser(9);
             }
         });
 
@@ -246,7 +249,7 @@ public class FileCheckActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         try {
             startActivityForResult(
-                    Intent.createChooser(intent, "File Chooser"), i);
+                    Intent.createChooser(intent, "File Chooser : " + (i+1)), i);
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
         }
@@ -254,9 +257,9 @@ public class FileCheckActivity extends AppCompatActivity {
     }
 
     public void check() {
-        int numbers = 7;
+        int numbers = 8;
         File file;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10; i++) {
             file = new File(filenames[i]);
             if (file.exists()) {
                 set_read_color(i);
@@ -264,7 +267,7 @@ public class FileCheckActivity extends AppCompatActivity {
         }
 
         if (aR_or_not.isChecked()) {
-            numbers = 9;
+            numbers = 10;
         }
 
         for (int i = 0; i < numbers; i++) {

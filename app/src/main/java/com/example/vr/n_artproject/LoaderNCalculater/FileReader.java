@@ -23,7 +23,7 @@ public class FileReader {
         float[] ospVert = new float[17];
         BufferedReader br;
         try {
-            br = new BufferedReader(new java.io.FileReader("/sdcard/" + fileName));
+            br = new BufferedReader(new java.io.FileReader(fileName));
 
             String str = br.readLine();
             ospVert[0] = Float.valueOf(str);
@@ -47,7 +47,7 @@ public class FileReader {
     //ARToolkit see-through Calibration file reader
     public float[] ARTReadBinary(String fileName) {
         double[] ospVert = new double[18];
-        File file = new File("/sdcard/" + fileName);
+        File file = new File(fileName);
         InputStream inputStream = null;
 
         try {
@@ -140,7 +140,7 @@ public class FileReader {
         BufferedReader br;
         String str;
         try {
-            br = new BufferedReader(new java.io.FileReader("/sdcard/" + projectName));
+            br = new BufferedReader(new java.io.FileReader(projectName));
 
             for (int i = 0; i < 15; i++) {    //Skip 15 lines
                 br.readLine();
@@ -173,9 +173,39 @@ public class FileReader {
         BufferedReader br;
 
         try {
-            br = new BufferedReader(new java.io.FileReader("/sdcard/" + projectName));
+            br = new BufferedReader(new java.io.FileReader(projectName));
 
             for (int i = 0; i < 7; i++) {
+                str = br.readLine();
+                String[] marker_value = str.split("\\t"); //space
+
+                for (int j = 0; j < 3; j++) {
+                    s_Markers[3 * i + j] = Float.valueOf(marker_value[j]);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return new float[]{Float.NaN};
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new float[]{Float.NaN};
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return new float[]{Float.NaN};
+        }
+        return s_Markers;
+    }
+
+    //poor FH plane reader
+    public float[] ReadPoorPoints(String projectName) {
+        float[] s_Markers = new float[12];
+        String str;
+        BufferedReader br;
+
+        try {
+            br = new BufferedReader(new java.io.FileReader(projectName));
+
+            for (int i = 0; i < 4; i++) {
                 str = br.readLine();
                 String[] marker_value = str.split("\\t"); //space
 

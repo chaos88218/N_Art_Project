@@ -1,7 +1,6 @@
 package com.example.vr.n_artproject;
 
 import android.graphics.Bitmap;
-import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +38,7 @@ public class ModelActivity extends AppCompatActivity {
     Thread uI_update;
 
     //Views
-    private GLSurfaceView mGLView;
+    private MyGLSurfaceView mGLView;
     private RelativeLayout glViewLayout;
     private RelativeLayout glViewParentLayout;
     private LinearLayout numbersLayout;
@@ -55,7 +54,7 @@ public class ModelActivity extends AppCompatActivity {
 
     //Numbers and data
     public String[] fileNames;
-    public static Bitmap glShotbitmap;
+    public static Bitmap gl_shot_bitmap;
     public static float[] matrix1 = new float[16];
     public static float[] matrix2 = new float[16];
 
@@ -137,57 +136,51 @@ public class ModelActivity extends AppCompatActivity {
                         }
 
                         if (resultword.equals("ANTERIOR")) {
-//                            Matrix.setIdentityM(MyGLRenderer.mAccumulatedMatrix, 0);
-//                            MyGLRenderer.setAngleX(-90.0f);
-//                            MyGLRenderer.setAngleY(0.0f);
+                            mGLView.setAngleX(-90.0f);
+                            mGLView.setAngleY(0.0f);
                         }
                         if (resultword.equals("POSTERIOR")) {
-//                            Matrix.setIdentityM(MyGLRenderer.mAccumulatedMatrix, 0);
-//                            MyGLRenderer.setAngleX(-90.0f);
-//                            MyGLRenderer.setAngleY(180.0f);
+                            mGLView.setAngleX(-90.0f);
+                            mGLView.setAngleY(180.0f);
                         }
                         if (resultword.equals("SUPERIOR")) {
-//                            Matrix.setIdentityM(MyGLRenderer.mAccumulatedMatrix, 0);
-//                            MyGLRenderer.setAngleX(0.0f);
-//                            MyGLRenderer.setAngleY(0.0f);
+                            mGLView.setAngleX(0.0f);
+                            mGLView.setAngleY(0.0f);
                         }
                         if (resultword.equals("INFERIOR")) {
-//                            Matrix.setIdentityM(MyGLRenderer.mAccumulatedMatrix, 0);
-//                            MyGLRenderer.setAngleX(180.0f);
-//                            MyGLRenderer.setAngleY(0.0f);
+                            mGLView.setAngleX(180.0f);
+                            mGLView.setAngleY(0.0f);
                         }
                         if (resultword.equals("RIGHT")) {
-//                            Matrix.setIdentityM(MyGLRenderer.mAccumulatedMatrix, 0);
-//                            MyGLRenderer.setAngleX(-90.0f);
-//                            MyGLRenderer.setAngleY(90.0f);
+                            mGLView.setAngleX(-90.0f);
+                            mGLView.setAngleY(90.0f);
                         }
                         if (resultword.equals("LEFT")) {
-//                            Matrix.setIdentityM(MyGLRenderer.mAccumulatedMatrix, 0);
-//                            MyGLRenderer.setAngleX(-90.0f);
-//                            MyGLRenderer.setAngleY(-90.0f);
+                            mGLView.setAngleX(-90.0f);
+                            mGLView.setAngleY(-90.0f);
                         }
                         if (resultword.equals("SHOT")) {
-//                            MyGLRenderer.Snap = true;
-//                            glShotImageView.setVisibility(View.VISIBLE);
-//
-//                            numbersLayout.setDrawingCacheEnabled(true);
-//                            Bitmap bitmap = Bitmap.createBitmap(numbersLayout.getDrawingCache());
-//                            numbersLayout.setDrawingCacheEnabled(false);
-//                            fiveNumbersImageView.setVisibility(View.VISIBLE);
+                            mGLView.setSnap(true);
+                            glShotImageView.setVisibility(View.VISIBLE);
 
-//                            while (!MyGLRenderer.Snaped) {
-//                            }
-//                            fiveNumbersImageView.setImageBitmap(bitmap);
-//                            numbersLayout.setVisibility(View.GONE);
-//                            glShotImageView.setImageBitmap(glShotbitmap);
-//                            MyGLRenderer.Snaped = false;
-                        }
+                            numbersLayout.setDrawingCacheEnabled(true);
+                            Bitmap bitmap = Bitmap.createBitmap(numbersLayout.getDrawingCache());
+                            numbersLayout.setDrawingCacheEnabled(false);
+                            fiveNumbersImageView.setVisibility(View.VISIBLE);
+
+                            while (!mGLView.getSnaped()) {
+                            }
+                            fiveNumbersImageView.setImageBitmap(bitmap);
+                            numbersLayout.setVisibility(View.GONE);
+                            glShotImageView.setImageBitmap(gl_shot_bitmap);
+                            mGLView.setSnaped(false);
+                    }
                         if (resultword.equals("REFRESH")) {
-//                            MyGLRenderer.Snap = false;
-//                            glShotImageView.setVisibility(View.GONE);
-//                            fiveNumbersImageView.setVisibility(View.GONE);
-//                            numbersLayout.setVisibility(View.VISIBLE);
-//                            MyGLRenderer.Snaped = false;
+                            mGLView.setSnap(false);
+                            glShotImageView.setVisibility(View.GONE);
+                            fiveNumbersImageView.setVisibility(View.GONE);
+                            numbersLayout.setVisibility(View.VISIBLE);
+                            mGLView.setSnaped(false);
                         }
                         if (resultword.equals("SAVE")) {
                             Date date = new Date();
@@ -211,7 +204,7 @@ public class ModelActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            glShotbitmap = null;
+                            gl_shot_bitmap = null;
                             glShotImageView.setVisibility(View.GONE);
                             fiveNumbersImageView.setVisibility(View.GONE);
                             numbersLayout.setVisibility(View.VISIBLE);

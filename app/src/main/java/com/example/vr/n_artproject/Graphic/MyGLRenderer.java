@@ -1,17 +1,15 @@
 package com.example.vr.n_artproject.Graphic;
 
-import android.opengl.GLES10;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
 
+import com.example.vr.n_artproject.LoaderNCalculater.FileReader;
 import com.example.vr.n_artproject.LoaderNCalculater.VectorCal;
 import com.example.vr.n_artproject.ModelActivity;
 import com.example.vr.n_artproject.Models.Model;
 import com.example.vr.n_artproject.Models.OSP;
 
-import org.artoolkit.ar.base.rendering.Cube;
 import org.artoolkit.ar.base.rendering.RenderUtils;
 
 import java.nio.FloatBuffer;
@@ -32,12 +30,13 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private Model mandible;
     private Model maxilla;
     private Model skull;
+    private float[] poor;
 
     //controls
     private boolean sTLLoadingCheck = false;
     private boolean[] AllSTLLoadingCheck = new boolean[]{true, true, true, true, true};
-    private static boolean Snap = false;
-    private static boolean Snaped = false;
+    public boolean Snap = false;
+    public boolean Snaped = false;
     private int glViewWide, glViewHeight;
     private float range = 120;
 
@@ -47,15 +46,15 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private float[] rotation_stack_matrix = new float[16];
 
     //light 0
-    private float[] ambientLight = new float[]{0.02f, 0.02f, 0.02f, 1.0f};
-    private float[] diffuseLight = new float[]{0.20f, 0.20f, 0.20f, 1.0f};
-    private float[] lightPos = new float[]{100.0f, -130.0f, 140.0f, 0.0f};
+    private float[] ambientLight = new float[]{0f, 0f, 0f, 1.0f};
+    private float[] diffuseLight = new float[]{0.2f, 0.2f, 0.2f, 1.0f};
+    private float[] lightPos = new float[]{150.0f, -200.0f, 200, 0.0f};
     //light 1
-    private float[] lightPos1 = new float[]{-100.0f, +130.0f, -140.0f, 0.0f};
+    private float[] lightPos1 = new float[]{-150.0f, +200.0f, -200, 0.0f};
 
-
-    private static volatile float mAngleX = -90;
-    private static volatile float mAngleY = 0;
+    private float angleFH = 0;
+    private float mAngleX = 0;
+    private float mAngleY = 0;
 
 
     public MyGLRenderer(String[] filenames) {
@@ -116,7 +115,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         //
         gl.glMatrixMode(GL10.GL_MODELVIEW);
-        if(sTLLoadingCheck){
+        if (sTLLoadingCheck) {
 
             load_matrix(gl);
             skull.draw(gl);
@@ -129,17 +128,15 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
             mandible.draw(gl);
 
 
-            GLES10.glEnable(GLES10.GL_BLEND);
-            GLES10.glBlendFunc(GLES10.GL_SRC_ALPHA, GLES10.GL_ONE_MINUS_SRC_ALPHA);
+            gl.glDisable(GL10.GL_LIGHTING);
             load_matrix(gl);
             mOSP1.draw(gl);
             gl.glMultMatrixf(ModelActivity.matrix2, 0);
             mOSP2.draw(gl);
-            GLES10.glDisable(GLES10.GL_BLEND);
         }
 
         if (Snap) {
-            ModelActivity.glShotbitmap = VectorCal.SavePixels(0, 0, glViewWide, glViewHeight);
+            ModelActivity.gl_shot_bitmap = VectorCal.SavePixels(0, 0, glViewWide, glViewHeight);
             Snap = false;
             Snaped = true;
         }
@@ -150,30 +147,49 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private Thread loadSTL = new Thread(new Runnable() {
         @Override
         public void run() {
-            skull = new Model(model_files[0], 0.6f);
+            skull = new Model(model_files[0], 1.0f);
             AllSTLLoadingCheck[0] = skull.isLoaded();
 
-            maxilla = new Model(model_files[1], 0.6f);
+            maxilla = new Model(model_files[1], 1.0f);
             AllSTLLoadingCheck[1] = maxilla.isLoaded();
 
-            mandible = new Model(model_files[2], 0.6f);
+            mandible = new Model(model_files[2], 1.0f);
             AllSTLLoadingCheck[2] = mandible.isLoaded();
 
-            mOSP1 = new OSP(model_files[3], new float[]{0.2f, 0.709803922f, 0.898039216f, 0.4f}, 0.3f);
+            mOSP1 = new OSP(model_files[3], new float[]{0.2f, 0.709803922f, 0.898039216f, 0.4f}, 0.25f);
             AllSTLLoadingCheck[3] = mOSP1.isLoaded();
-            if(mOSP1.isLoaded()){
+            if (mOSP1.isLoaded()) {
                 Matrix.rotateM(osp_ad_matrix, 0, mOSP1.normal_angle, mOSP1.rotation_vector[0], mOSP1.rotation_vector[1], mOSP1.rotation_vector[2]);
                 Matrix.translateM(osp_ad_matrix, 0, -mOSP1.mean_position[0], -mOSP1.mean_position[1], -mOSP1.mean_position[2]);
             }
 
-            mOSP2 = new OSP(model_files[4], new float[]{1f, 0.54902f, 0f, 0.4f}, 0.3f);
+            mOSP2 = new OSP(model_files[4], new float[]{1f, 0.54902f, 0f, 0.4f}, 0.25f);
             AllSTLLoadingCheck[4] = mOSP2.isLoaded();
+
+            FileReader fileReader = new FileReader();
+            poor = fileReader.ReadPoorPoints(model_files[7]);
+            if (!Float.isNaN(poor[0])) {
+                poor = new float[]{poor[0], poor[1], poor[2],
+                        (poor[3] + poor[6]) / 2.0f, (poor[4] + poor[7]) / 2.0f, (poor[5] + poor[8]) / 2.0f,
+                        poor[9], poor[10], poor[11],
+                };
+
+//                poor = new float[]{(poor[0] + poor[9]) / 2.0f, (poor[1] + poor[10]) / 2.0f, (poor[2] + poor[11]) / 2.0f,
+//                        poor[3], poor[4], poor[5],
+//                        poor[6], poor[7], poor[8],
+//                };
+                poor = VectorCal.getNormByPtArray(poor);
+                poor = new float[]{0, poor[1], poor[2]};
+                angleFH = (float) Math.acos((double) VectorCal.dot(poor, new float[]{0.0f, 0.0f, 1.0f})) * 180f / 3.1415926f;
+                Log.d("mAngleX", angleFH + "");
+                angleFH -= 90;
+            }
 
             all_stl_check();
         }
     });
 
-    private void load_matrix(GL10 gl){
+    private void load_matrix(GL10 gl) {
         gl.glLoadIdentity();
 
         //rotational stack
@@ -186,16 +202,16 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         Matrix.multiplyMM(temp, 0, rotation_stack_matrix, 0, last_rotaion_matrix, 0);
         last_rotaion_matrix = temp;
 
+        //drawing Matrix
         gl.glMultMatrixf(temp, 0);
-
-        //TODO: FH plane
+        gl.glRotatef(angleFH, 1, 0, 0);
         gl.glMultMatrixf(osp_ad_matrix, 0);
     }
 
 
-    private void all_stl_check(){
+    private void all_stl_check() {
         boolean temp = true;
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             temp = temp & AllSTLLoadingCheck[i];
         }
         sTLLoadingCheck = temp;
@@ -204,6 +220,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     void setAngleX(float angle) {
         mAngleX = angle;
     }
+
     void setAngleY(float angle) {
         mAngleY = angle;
     }
