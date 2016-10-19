@@ -63,6 +63,13 @@ public class FileCheckActivity extends AppCompatActivity {
     boolean check_all = true;
 
     String root_path = "/sdcard/";
+    String[] check_name = new String[]{
+            "Skull", "Maxilla",
+            "Mandible", "Maxilla OSP",
+            "Mandible OSP", "Registration",
+            "Markers", "P.O.O.R.",
+            "VSCM", "ARToolkit calibration"
+    };
     String[] filenames = new String[]{
             root_path + "skull.stl", root_path + "maxilla.stl",
             root_path + "mandible.stl", root_path + "max_OSP.stl",
@@ -182,7 +189,7 @@ public class FileCheckActivity extends AppCompatActivity {
                             Log.d("l-STCorN", true + "");
                         } else {
                             fileReader = new FileReader();
-                            ARC = fileReader.ARTReadBinary(filenames[8]);
+                            ARC = fileReader.ARTReadBinary(filenames[9]);
                             bundle.putBoolean("STCorN", false);
                             bundle.putFloat("ARC", ARC[1]);
                             Log.d("l-STCorN", false + "");
@@ -249,7 +256,7 @@ public class FileCheckActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         try {
             startActivityForResult(
-                    Intent.createChooser(intent, "File Chooser : " + (i+1)), i);
+                    Intent.createChooser(intent, "File Select : " + check_name[i]), i);
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
         }

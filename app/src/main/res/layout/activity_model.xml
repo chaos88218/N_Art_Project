@@ -14,18 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_weight="0.1"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:layout_height="40sp">
 
             <TextView
                 android:id="@+id/textView"
@@ -60,28 +60,38 @@
 
         </LinearLayout>
 
+        <Button
+            android:text="I"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:id="@+id/buttonI"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:text="R"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:id="@+id/buttonR"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/buttonI" />
+
+        <Button
+            android:text="A"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:id="@+id/buttonA"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/buttonR" />
+
         <RelativeLayout
             android:id="@+id/glParentRelLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout2">
-
-            <RelativeLayout
-                android:id="@+id/GLview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_weight="0.9"
-                android:focusable="true"
-                android:focusableInTouchMode="true">
-
-                <requestFocus/>
-
-            </RelativeLayout>
 
             <TextView
                 android:id="@+id/RecText"
@@ -256,6 +266,19 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/GLview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/glShotImage">
+
+                <requestFocus/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 

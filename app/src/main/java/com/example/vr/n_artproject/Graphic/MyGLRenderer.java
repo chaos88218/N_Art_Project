@@ -147,23 +147,23 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private Thread loadSTL = new Thread(new Runnable() {
         @Override
         public void run() {
-            skull = new Model(model_files[0], 1.0f);
+            skull = new Model(model_files[0],  new float[]{0.2f, 0.709803922f, 0.898039216f}, 1.0f);
             AllSTLLoadingCheck[0] = skull.isLoaded();
 
             maxilla = new Model(model_files[1], 1.0f);
             AllSTLLoadingCheck[1] = maxilla.isLoaded();
 
-            mandible = new Model(model_files[2], 1.0f);
+            mandible = new Model(model_files[2], new float[]{1f, 0.54902f, 0f}, 1.0f);
             AllSTLLoadingCheck[2] = mandible.isLoaded();
 
-            mOSP1 = new OSP(model_files[3], new float[]{0.2f, 0.709803922f, 0.898039216f, 0.4f}, 0.25f);
+            mOSP1 = new OSP(model_files[3], new float[]{0.2f, 0.709803922f, 0.898039216f}, 0.25f);
             AllSTLLoadingCheck[3] = mOSP1.isLoaded();
             if (mOSP1.isLoaded()) {
                 Matrix.rotateM(osp_ad_matrix, 0, mOSP1.normal_angle, mOSP1.rotation_vector[0], mOSP1.rotation_vector[1], mOSP1.rotation_vector[2]);
                 Matrix.translateM(osp_ad_matrix, 0, -mOSP1.mean_position[0], -mOSP1.mean_position[1], -mOSP1.mean_position[2]);
             }
 
-            mOSP2 = new OSP(model_files[4], new float[]{1f, 0.54902f, 0f, 0.4f}, 0.25f);
+            mOSP2 = new OSP(model_files[4], new float[]{1f, 0.54902f, 0f}, 0.25f);
             AllSTLLoadingCheck[4] = mOSP2.isLoaded();
 
             FileReader fileReader = new FileReader();
@@ -174,15 +174,12 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
                         poor[9], poor[10], poor[11],
                 };
 
-//                poor = new float[]{(poor[0] + poor[9]) / 2.0f, (poor[1] + poor[10]) / 2.0f, (poor[2] + poor[11]) / 2.0f,
-//                        poor[3], poor[4], poor[5],
-//                        poor[6], poor[7], poor[8],
-//                };
                 poor = VectorCal.getNormByPtArray(poor);
                 poor = new float[]{0, poor[1], poor[2]};
                 angleFH = (float) Math.acos((double) VectorCal.dot(poor, new float[]{0.0f, 0.0f, 1.0f})) * 180f / 3.1415926f;
                 Log.d("mAngleX", angleFH + "");
-                angleFH -= 90;
+                angleFH += 90;
+                angleFH = -angleFH;
             }
 
             all_stl_check();
@@ -215,6 +212,10 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
             temp = temp & AllSTLLoadingCheck[i];
         }
         sTLLoadingCheck = temp;
+    }
+
+    void setRotationIdendity(){
+        Matrix.setIdentityM(last_rotaion_matrix, 0);
     }
 
     void setAngleX(float angle) {

@@ -46,6 +46,11 @@ public class Model {
         }
     }
 
+    public Model(String string, float[] in_color, float alpha) {
+        this(string, alpha);
+        setColor(in_color, alpha);
+    }
+
     public boolean isLoaded(){
         return Loaded;
     }

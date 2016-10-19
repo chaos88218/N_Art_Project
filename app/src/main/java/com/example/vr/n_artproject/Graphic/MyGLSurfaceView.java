@@ -2,6 +2,7 @@ package com.example.vr.n_artproject.Graphic;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 import android.view.MotionEvent;
 
 /**
@@ -42,6 +43,10 @@ public class MyGLSurfaceView extends GLSurfaceView {
         mPreviousX = x;
         mPreviousY = y;
         return true;
+    }
+
+    public void setRotationIdendity(){
+        mRenderer.setRotationIdendity();
     }
 
     public void setAngleX(float angle){

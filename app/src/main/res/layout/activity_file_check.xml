@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1. Skull Model"
+            android:text="1. Skull"
             android:id="@+id/skull_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2. Maxilla Model"
+            android:text="2. Maxilla"
             android:id="@+id/maxi_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3. Mandible Model"
+            android:text="3. Mandible"
             android:id="@+id/mand_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -61,7 +61,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6. N-Art Project"
+            android:text="6. Registration"
             android:id="@+id/project_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -69,7 +69,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7. AR Marker Points"
+            android:text="7. Markers"
             android:id="@+id/ar_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>
@@ -77,7 +77,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8. Poor Points"
+            android:text="8. P.O.O.R."
             android:id="@+id/poor_check_text"
             android:textColor="#ff000d"
             android:textSize="18sp"/>

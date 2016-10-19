@@ -47,6 +47,7 @@ public class ModelActivity extends AppCompatActivity {
     private ImageView fiveNumbersImageView;
 
     public Button sockConn;
+    public Button b_A, b_R, b_I;
 
     public EditText IP_text;
     private TextView recvout;
@@ -63,14 +64,15 @@ public class ModelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //get Bundle
         Bundle bundle = this.getIntent().getExtras();
         fileNames = bundle.getStringArray("FILE_NAME");
         Matrix.setIdentityM(matrix1, 0);
         Matrix.setIdentityM(matrix2, 0);
 
+        //Full screen and drawing views
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         mGLView = new MyGLSurfaceView(this, fileNames);
         setContentView(R.layout.activity_model);
 
@@ -98,6 +100,29 @@ public class ModelActivity extends AppCompatActivity {
         });
 
         //message and graphic
+        b_A = (Button) findViewById(R.id.buttonA);
+        b_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGLView.setRotationIdendity();
+            }
+        });
+        b_R = (Button) findViewById(R.id.buttonR);
+        b_R.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGLView.setRotationIdendity();
+                mGLView.setAngleY(90);
+            }
+        });
+        b_I = (Button) findViewById(R.id.buttonI);
+        b_I.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGLView.setRotationIdendity();
+                mGLView.setAngleX(-90);
+            }
+        });
         recvout = (TextView) findViewById(R.id.RecText);
         recvout.setMovementMethod(new ScrollingMovementMethod());
         glViewLayout = (RelativeLayout) findViewById(R.id.GLview);
@@ -136,28 +161,27 @@ public class ModelActivity extends AppCompatActivity {
                         }
 
                         if (resultword.equals("ANTERIOR")) {
-                            mGLView.setAngleX(-90.0f);
-                            mGLView.setAngleY(0.0f);
+                            mGLView.setRotationIdendity();
                         }
                         if (resultword.equals("POSTERIOR")) {
-                            mGLView.setAngleX(-90.0f);
-                            mGLView.setAngleY(180.0f);
+                            mGLView.setRotationIdendity();
+                            mGLView.setAngleY(180);
                         }
                         if (resultword.equals("SUPERIOR")) {
-                            mGLView.setAngleX(0.0f);
-                            mGLView.setAngleY(0.0f);
+                            mGLView.setRotationIdendity();
+                            mGLView.setAngleX(90);
                         }
                         if (resultword.equals("INFERIOR")) {
-                            mGLView.setAngleX(180.0f);
-                            mGLView.setAngleY(0.0f);
+                            mGLView.setRotationIdendity();
+                            mGLView.setAngleX(-90);
                         }
                         if (resultword.equals("RIGHT")) {
-                            mGLView.setAngleX(-90.0f);
-                            mGLView.setAngleY(90.0f);
+                            mGLView.setRotationIdendity();
+                            mGLView.setAngleY(90);
                         }
                         if (resultword.equals("LEFT")) {
-                            mGLView.setAngleX(-90.0f);
-                            mGLView.setAngleY(-90.0f);
+                            mGLView.setRotationIdendity();
+                            mGLView.setAngleY(-90);
                         }
                         if (resultword.equals("SHOT")) {
                             mGLView.setSnap(true);
@@ -215,7 +239,6 @@ public class ModelActivity extends AppCompatActivity {
         };
         mRecognizer.connectService();
         mRecognizer.registerListener(mListener);
-
     }
 
 
