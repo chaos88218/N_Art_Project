@@ -75,7 +75,7 @@ public class FileCheckActivity extends AppCompatActivity {
             root_path + "mandible.stl", root_path + "max_OSP.stl",
             root_path + "man_OSP.stl", root_path + "arproject.txt",
             root_path + "arpoints.txt", root_path + "poor.txt"
-            , root_path + "HECmatrix.txt", root_path + "optical_param_left.dat"};
+            , root_path + "VSCM.txt", root_path + "optical_param_left.dat"};
     boolean[] check = new boolean[]{
             false, false,
             false, false,
@@ -185,7 +185,10 @@ public class FileCheckActivity extends AppCompatActivity {
                     if (aR_or_not.isChecked()) {
                         intent = new Intent(FileCheckActivity.this, GlassARActivity.class);
                         if (STC_check.isChecked()) {
+                            fileReader = new FileReader();
                             bundle.putBoolean("STCorN", true);
+                            ARC = fileReader.ARSReadTxt(filenames[8]);
+                            bundle.putFloat("ARC", ARC[1]);
                             Log.d("l-STCorN", true + "");
                         } else {
                             fileReader = new FileReader();

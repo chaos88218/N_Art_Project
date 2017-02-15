@@ -33,6 +33,7 @@ import org.artoolkit.ar.base.rendering.ARRenderer;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GlassARActivity extends ARActivity {
@@ -94,7 +95,7 @@ public class GlassARActivity extends ARActivity {
         width = display.getWidth();
         orig_height = display.getHeight();
         if (STCorN) {
-            height = (int) (width * 3.0f / 4.0f);
+            height = (int) (width / ARC);
         } else {
             height = (int) (width / ARC);
         }
@@ -149,7 +150,7 @@ public class GlassARActivity extends ARActivity {
 
         //SiME Speech recognizer
         mRecognizer = new SiMESpeechRecognizer(this);
-        mRecognizer.setLanguageModelFiles("5467.dic", "5467.lm");
+        mRecognizer.setLanguageModelFiles("ARV.dic", "ARC.lm");
         mRecognizer.setKeyPhrase("GLASS");
         mRecognizer.setKeywordThreshold("1e-20");
         mRecognizer.setVadThreshold("3.0f");
@@ -175,12 +176,7 @@ public class GlassARActivity extends ARActivity {
                     @Override
                     public void run() {
                         Toast.makeText(GlassARActivity.this, resultword, Toast.LENGTH_SHORT).show();
-                        if (resultword.equals("VOICE")) {
-                            VOICE_SWITCH = !VOICE_SWITCH;
-                            Toast.makeText(GlassARActivity.this, "VOICE " + VOICE_SWITCH, Toast.LENGTH_SHORT).show();
-                        }
-
-                        if (resultword.equals("CONNECT")) {
+                        if (resultword.equals("INFORMATION")) {
                             if (sockConn.isClickable()) {
                                 thread_start();
                                 Toast.makeText(GlassARActivity.this, "CONNECT", Toast.LENGTH_SHORT).show();
@@ -191,34 +187,6 @@ public class GlassARActivity extends ARActivity {
                         if (resultword.equals("MODEL")) {
                             modelViewable = !modelViewable;
                             Toast.makeText(GlassARActivity.this, "MODEL " + modelViewable, Toast.LENGTH_SHORT).show();
-                        }
-
-                        if (resultword.equals("SHOT")) {
-                            Toast.makeText(GlassARActivity.this, "SHOT", Toast.LENGTH_SHORT).show();
-                            Date now = new Date();
-                            android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
-
-                            try {
-                                // image naming and path  to include sd card  appending name you choose for file
-                                String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".png";
-
-                                // create bitmap screen capture
-                                View v1 = getWindow().getDecorView().getRootView();
-                                v1.setDrawingCacheEnabled(true);
-                                Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-                                v1.setDrawingCacheEnabled(false);
-
-                                File imageFile = new File(mPath);
-
-                                FileOutputStream outputStream = new FileOutputStream(imageFile);
-                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                                outputStream.flush();
-                                outputStream.close();
-                            } catch (Throwable e) {
-                                // Several error may come out with file handling or OOM
-                                e.printStackTrace();
-                            }
-                            Toast.makeText(GlassARActivity.this, "SHOT " + VOICE_SWITCH, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -296,6 +264,11 @@ public class GlassARActivity extends ARActivity {
                         matrix1 = tcpThread.get_matrix(0);
                         matrix2 = tcpThread.get_matrix(1);
                         tcpThread.setFive_num_text(five_num_text);
+                        five_num_text[0].setText("DA:" + five_num_text[0].getText());
+                        five_num_text[1].setText("DD:" + five_num_text[1].getText());
+                        five_num_text[2].setText("FDA:" + five_num_text[2].getText());
+                        five_num_text[3].setText("HDA:" + five_num_text[3].getText());
+                        five_num_text[4].setText("PDD:" + five_num_text[4].getText());
                         tcpThread.setLogMes(logMes);
                     }
                 } catch (Exception e) {

@@ -182,7 +182,7 @@ public class MyARRenderer extends org.artoolkit.ar.base.rendering.ARRenderer {
     private void load_matrix(GL10 gl) {
         if (STCorN) {
             if (AllSTLLoadingCheck[6]) {
-                gl.glLoadMatrixf(ARS, 1);
+                gl.glLoadMatrixf(ARS, 2);
             } else {
                 gl.glLoadIdentity();
             }

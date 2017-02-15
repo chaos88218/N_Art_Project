@@ -45,6 +45,16 @@ public class MyGLSurfaceView extends GLSurfaceView {
         return true;
     }
 
+    public void setZoom( float zoom){mRenderer.setZoom(zoom);}
+    public void setY_shift(float y) {
+        mRenderer.setY_shift(y);
+    }
+
+    public void setX_shift(float X) {
+        mRenderer.setX_shift(X);
+    }
+    public void resetZoom(){ mRenderer.resetZoom();}
+
     public void setRotationIdendity(){
         mRenderer.setRotationIdendity();
     }

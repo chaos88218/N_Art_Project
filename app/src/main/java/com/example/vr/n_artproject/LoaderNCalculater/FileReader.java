@@ -20,7 +20,7 @@ import java.nio.ByteOrder;
 public class FileReader {
     //VSCM Calibration file reader
     public float[] ARSReadTxt(String fileName) {
-        float[] ospVert = new float[17];
+        float[] ospVert = new float[18];
         BufferedReader br;
         try {
             br = new BufferedReader(new java.io.FileReader(fileName));
@@ -29,9 +29,12 @@ public class FileReader {
             ospVert[0] = Float.valueOf(str);
 
             str = br.readLine();
+            ospVert[1] = Float.valueOf(str);
+
+            str = br.readLine();
             String[] matrix = str.split("\\t");
             for (int i = 0; i < matrix.length; i++) {
-                ospVert[i + 1] = Float.valueOf(matrix[i]);
+                ospVert[i + 2] = Float.valueOf(matrix[i]);
             }
 
         } catch (FileNotFoundException e) {

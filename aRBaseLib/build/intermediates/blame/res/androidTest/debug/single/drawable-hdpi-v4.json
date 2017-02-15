@@ -1,10 +1,6 @@
 [
     {
-        "merged": "F:\\Android project\\N-ArtProject\\aRBaseLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\settings.png",
-        "source": "F:\\Android project\\N-ArtProject\\aRBaseLib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\settings.png"
-    },
-    {
-        "merged": "F:\\Android project\\GlassAR\\aRBaseLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\settings.png",
-        "source": "F:\\Android project\\GlassAR\\aRBaseLib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\settings.png"
+        "merged": "D:\\AP\\N_Art_Project\\aRBaseLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\settings.png",
+        "source": "D:\\AP\\N_Art_Project\\aRBaseLib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\settings.png"
     }
 ]

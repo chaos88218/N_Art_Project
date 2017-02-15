@@ -25,6 +25,7 @@ import com.sime.speech.SiMESpeechRecognizer;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class ModelActivity extends AppCompatActivity {
@@ -59,6 +60,10 @@ public class ModelActivity extends AppCompatActivity {
     public static float[] matrix1 = new float[16];
     public static float[] matrix2 = new float[16];
 
+    //Model control
+    private boolean ZOOM = false;
+    private boolean info = true;
+    public static boolean show_model = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +135,7 @@ public class ModelActivity extends AppCompatActivity {
 
         //SiME Speech recognizer
         mRecognizer = new SiMESpeechRecognizer(this);
-        mRecognizer.setLanguageModelFiles("0901.dic", "0901.lm");
+        mRecognizer.setLanguageModelFiles("MOV.dic", "MOV.lm");
         mRecognizer.setKeyPhrase("GLASS");
         mRecognizer.setKeywordThreshold("1e-20");
         mRecognizer.setVadThreshold("3.0f");
@@ -155,33 +160,69 @@ public class ModelActivity extends AppCompatActivity {
                     public void run() {
                         Log.e("resultword: ", resultword);
                         Toast.makeText(ModelActivity.this, resultword, Toast.LENGTH_SHORT).show();
-                        if (resultword.equals("CONNECT")) {
-                            sockConn.setEnabled(false);
-                            thread_start();
+                        if (resultword.equals("RESET")) {
+                            ZOOM = false;
+                            mGLView.resetZoom();
                         }
-
-                        if (resultword.equals("ANTERIOR")) {
+                        if (resultword.equals("IN")) {
+                            ZOOM = true;
+                            mGLView.setZoom(0.5f);
+                        }
+                        if (resultword.equals("OUT")) {
+                            ZOOM = true;
+                            mGLView.setZoom(-0.5f);
+                        }
+                        if (resultword.equals("FRONT")) {
                             mGLView.setRotationIdendity();
                         }
-                        if (resultword.equals("POSTERIOR")) {
+                        if (resultword.equals("BACK")) {
                             mGLView.setRotationIdendity();
                             mGLView.setAngleY(180);
                         }
-                        if (resultword.equals("SUPERIOR")) {
-                            mGLView.setRotationIdendity();
-                            mGLView.setAngleX(90);
+                        if (resultword.equals("UP")) {
+                            if (ZOOM) {
+                                mGLView.setY_shift(10);
+                            } else {
+                                mGLView.setRotationIdendity();
+                                mGLView.setAngleX(90);
+                            }
                         }
-                        if (resultword.equals("INFERIOR")) {
-                            mGLView.setRotationIdendity();
-                            mGLView.setAngleX(-90);
+                        if (resultword.equals("DOWN")) {
+                            if (ZOOM) {
+                                mGLView.setY_shift(-10);
+                            } else {
+                                mGLView.setRotationIdendity();
+                                mGLView.setAngleX(-90);
+                            }
                         }
                         if (resultword.equals("RIGHT")) {
-                            mGLView.setRotationIdendity();
-                            mGLView.setAngleY(90);
+                            if (ZOOM) {
+                                mGLView.setX_shift(10);
+                            } else {
+                                mGLView.setRotationIdendity();
+                                mGLView.setAngleY(90);
+                            }
                         }
                         if (resultword.equals("LEFT")) {
-                            mGLView.setRotationIdendity();
-                            mGLView.setAngleY(-90);
+                            if (ZOOM) {
+                                mGLView.setX_shift(-10);
+                            } else {
+                                mGLView.setRotationIdendity();
+                                mGLView.setAngleY(-90);
+                            }
+                        }
+                        if (resultword.equals("INFORMATION")) {
+                            info = !info;
+                            if(info){
+                                numbersLayout.setVisibility(View.VISIBLE);
+                                recvout.setVisibility(View.VISIBLE);
+                            }else{
+                                numbersLayout.setVisibility(View.GONE);
+                                recvout.setVisibility(View.GONE);
+                            }
+                        }
+                        if (resultword.equals("MODEL")) {
+                            show_model = !show_model;
                         }
                         if (resultword.equals("SHOT")) {
                             mGLView.setSnap(true);
@@ -198,7 +239,7 @@ public class ModelActivity extends AppCompatActivity {
                             numbersLayout.setVisibility(View.GONE);
                             glShotImageView.setImageBitmap(gl_shot_bitmap);
                             mGLView.setSnaped(false);
-                    }
+                        }
                         if (resultword.equals("REFRESH")) {
                             mGLView.setSnap(false);
                             glShotImageView.setVisibility(View.GONE);

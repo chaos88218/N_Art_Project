@@ -13,6 +13,7 @@ import com.example.vr.n_artproject.Models.OSP;
 import org.artoolkit.ar.base.rendering.RenderUtils;
 
 import java.nio.FloatBuffer;
+import java.util.Arrays;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -55,6 +56,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private float angleFH = 0;
     private float mAngleX = 0;
     private float mAngleY = 0;
+    private float z_shift = 1, x_shift = 0, y_shift = 0;
 
 
     public MyGLRenderer(String[] filenames) {
@@ -117,16 +119,17 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         if (sTLLoadingCheck) {
 
-            load_matrix(gl);
-            skull.draw(gl);
+            if(ModelActivity.show_model) {
+                load_matrix(gl);
+                skull.draw(gl);
 
-            gl.glMultMatrixf(ModelActivity.matrix1, 0);
-            maxilla.draw(gl);
+                gl.glMultMatrixf(ModelActivity.matrix1, 0);
+                maxilla.draw(gl);
 
-            load_matrix(gl);
-            gl.glMultMatrixf(ModelActivity.matrix2, 0);
-            mandible.draw(gl);
-
+                load_matrix(gl);
+                gl.glMultMatrixf(ModelActivity.matrix2, 0);
+                mandible.draw(gl);
+            }
 
             gl.glDisable(GL10.GL_LIGHTING);
             load_matrix(gl);
@@ -147,7 +150,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private Thread loadSTL = new Thread(new Runnable() {
         @Override
         public void run() {
-            skull = new Model(model_files[0],  new float[]{0.2f, 0.709803922f, 0.898039216f}, 1.0f);
+            skull = new Model(model_files[0], new float[]{0.2f, 0.709803922f, 0.898039216f}, 1.0f);
             AllSTLLoadingCheck[0] = skull.isLoaded();
 
             maxilla = new Model(model_files[1], 1.0f);
@@ -189,6 +192,10 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private void load_matrix(GL10 gl) {
         gl.glLoadIdentity();
 
+        gl.glScalef(z_shift, z_shift, z_shift);
+        //zooming stack
+        gl.glTranslatef(x_shift, y_shift, 0);
+
         //rotational stack
         float[] temp = new float[16];
         Matrix.setIdentityM(rotation_stack_matrix, 0);
@@ -214,7 +221,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         sTLLoadingCheck = temp;
     }
 
-    void setRotationIdendity(){
+    void setRotationIdendity() {
         Matrix.setIdentityM(last_rotaion_matrix, 0);
     }
 
@@ -224,5 +231,23 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     void setAngleY(float angle) {
         mAngleY = angle;
+    }
+
+    void setZoom(float zoom) {
+        z_shift += zoom;
+    }
+
+    void setY_shift(float y) {
+        y_shift += y;
+    }
+
+    void setX_shift(float X) {
+        x_shift += X;
+    }
+
+    void resetZoom() {
+        z_shift = 1;
+        x_shift = 0;
+        y_shift = 0;
     }
 }
