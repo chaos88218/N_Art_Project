@@ -1,0 +1,85 @@
+Language model created by QuickLM on Sun Jan  8 03:44:37 EST 2017
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 15 sentences and 17 words
+
+\data\
+ngram 1=17
+ngram 2=30
+ngram 3=15
+
+\1-grams:
+-0.7782 </s> -0.3010
+-0.7782 <s> -0.2218
+-1.9542 BACK -0.2218
+-1.9542 DOWN -0.2218
+-1.9542 FRONT -0.2218
+-1.9542 GLASS -0.2218
+-1.9542 IN -0.2218
+-1.9542 INFORMATION -0.2218
+-1.9542 LEFT -0.2218
+-1.9542 MODEL -0.2218
+-1.9542 OUT -0.2218
+-1.9542 REFRESH -0.2218
+-1.9542 RESET -0.2218
+-1.9542 RIGHT -0.2218
+-1.9542 SAVE -0.2218
+-1.9542 SHOT -0.2218
+-1.9542 UP -0.2218
+
+\2-grams:
+-1.4771 <s> BACK 0.0000
+-1.4771 <s> DOWN 0.0000
+-1.4771 <s> FRONT 0.0000
+-1.4771 <s> GLASS 0.0000
+-1.4771 <s> IN 0.0000
+-1.4771 <s> INFORMATION 0.0000
+-1.4771 <s> LEFT 0.0000
+-1.4771 <s> MODEL 0.0000
+-1.4771 <s> OUT 0.0000
+-1.4771 <s> REFRESH 0.0000
+-1.4771 <s> RESET 0.0000
+-1.4771 <s> RIGHT 0.0000
+-1.4771 <s> SAVE 0.0000
+-1.4771 <s> SHOT 0.0000
+-1.4771 <s> UP 0.0000
+-0.3010 BACK </s> -0.3010
+-0.3010 DOWN </s> -0.3010
+-0.3010 FRONT </s> -0.3010
+-0.3010 GLASS </s> -0.3010
+-0.3010 IN </s> -0.3010
+-0.3010 INFORMATION </s> -0.3010
+-0.3010 LEFT </s> -0.3010
+-0.3010 MODEL </s> -0.3010
+-0.3010 OUT </s> -0.3010
+-0.3010 REFRESH </s> -0.3010
+-0.3010 RESET </s> -0.3010
+-0.3010 RIGHT </s> -0.3010
+-0.3010 SAVE </s> -0.3010
+-0.3010 SHOT </s> -0.3010
+-0.3010 UP </s> -0.3010
+
+\3-grams:
+-0.3010 <s> BACK </s>
+-0.3010 <s> DOWN </s>
+-0.3010 <s> FRONT </s>
+-0.3010 <s> GLASS </s>
+-0.3010 <s> IN </s>
+-0.3010 <s> INFORMATION </s>
+-0.3010 <s> LEFT </s>
+-0.3010 <s> MODEL </s>
+-0.3010 <s> OUT </s>
+-0.3010 <s> REFRESH </s>
+-0.3010 <s> RESET </s>
+-0.3010 <s> RIGHT </s>
+-0.3010 <s> SAVE </s>
+-0.3010 <s> SHOT </s>
+-0.3010 <s> UP </s>
+
+\end\

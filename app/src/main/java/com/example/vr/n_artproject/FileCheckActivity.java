@@ -268,6 +268,7 @@ public class FileCheckActivity extends AppCompatActivity {
 
     public void check() {
         int numbers = 8;
+        check_all = true;
         File file;
         for (int i = 0; i < 10; i++) {
             file = new File(filenames[i]);
@@ -282,6 +283,7 @@ public class FileCheckActivity extends AppCompatActivity {
 
         for (int i = 0; i < numbers; i++) {
             check_all = check_all & check[i];
+            Log.d("check", check[i]+"");
         }
     }
 

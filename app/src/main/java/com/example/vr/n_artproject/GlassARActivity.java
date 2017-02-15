@@ -264,11 +264,6 @@ public class GlassARActivity extends ARActivity {
                         matrix1 = tcpThread.get_matrix(0);
                         matrix2 = tcpThread.get_matrix(1);
                         tcpThread.setFive_num_text(five_num_text);
-                        five_num_text[0].setText("DA:" + five_num_text[0].getText());
-                        five_num_text[1].setText("DD:" + five_num_text[1].getText());
-                        five_num_text[2].setText("FDA:" + five_num_text[2].getText());
-                        five_num_text[3].setText("HDA:" + five_num_text[3].getText());
-                        five_num_text[4].setText("PDD:" + five_num_text[4].getText());
                         tcpThread.setLogMes(logMes);
                     }
                 } catch (Exception e) {

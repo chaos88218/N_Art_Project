@@ -1,0 +1,49 @@
+Language model created by QuickLM on Sun Jan  8 03:43:28 EST 2017
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 6 sentences and 8 words
+
+\data\
+ngram 1=8
+ngram 2=12
+ngram 3=6
+
+\1-grams:
+-0.7782 </s> -0.3010
+-0.7782 <s> -0.2218
+-1.5563 GLASS -0.2218
+-1.5563 INFORMATION -0.2218
+-1.5563 MODEL -0.2218
+-1.5563 REFRESH -0.2218
+-1.5563 SAVE -0.2218
+-1.5563 SHOT -0.2218
+
+\2-grams:
+-1.0792 <s> GLASS 0.0000
+-1.0792 <s> INFORMATION 0.0000
+-1.0792 <s> MODEL 0.0000
+-1.0792 <s> REFRESH 0.0000
+-1.0792 <s> SAVE 0.0000
+-1.0792 <s> SHOT 0.0000
+-0.3010 GLASS </s> -0.3010
+-0.3010 INFORMATION </s> -0.3010
+-0.3010 MODEL </s> -0.3010
+-0.3010 REFRESH </s> -0.3010
+-0.3010 SAVE </s> -0.3010
+-0.3010 SHOT </s> -0.3010
+
+\3-grams:
+-0.3010 <s> GLASS </s>
+-0.3010 <s> INFORMATION </s>
+-0.3010 <s> MODEL </s>
+-0.3010 <s> REFRESH </s>
+-0.3010 <s> SAVE </s>
+-0.3010 <s> SHOT </s>
+
+\end\

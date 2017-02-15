@@ -202,6 +202,7 @@ public class TCPThread {
             public void run() {
                 for(int i = 0; i < 5; i++){
                     five_num_text[i].setText(String.format("%.1f", f_num[i]));
+                    Log.d("thread_five", f_num[i] + "");
                 }
             }
         });
@@ -214,6 +215,7 @@ public class TCPThread {
                 log_text.setText(logMesg);
             }
         });
+        Log.d("thread_five", logMesg);
     }
 
     public void SockConHandle(final TextView sockConn, final boolean cc) {

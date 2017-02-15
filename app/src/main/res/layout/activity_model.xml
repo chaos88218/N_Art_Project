@@ -93,6 +93,19 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout2">
 
+            <RelativeLayout
+                android:id="@+id/GLview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/glShotImage">
+
+                <requestFocus/>
+
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/RecText"
                 android:layout_width="wrap_content"
@@ -266,19 +279,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:visibility="gone"/>
-
-            <RelativeLayout
-                android:id="@+id/GLview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/glShotImage">
-
-                <requestFocus/>
-
-            </RelativeLayout>
 
         </RelativeLayout>
 
