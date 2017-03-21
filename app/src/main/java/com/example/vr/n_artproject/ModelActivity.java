@@ -4,16 +4,19 @@ import android.graphics.Bitmap;
 import android.opengl.Matrix;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +56,8 @@ public class ModelActivity extends AppCompatActivity {
     public EditText IP_text;
     private TextView recvout;
     private TextView[] five_num_text = new TextView[5];
+
+    private Switch sound_switch;
 
     //Numbers and data
     public String[] fileNames;
@@ -213,10 +218,10 @@ public class ModelActivity extends AppCompatActivity {
                         }
                         if (resultword.equals("INFORMATION")) {
                             info = !info;
-                            if(info){
+                            if (info) {
                                 numbersLayout.setVisibility(View.VISIBLE);
                                 recvout.setVisibility(View.VISIBLE);
-                            }else{
+                            } else {
                                 numbersLayout.setVisibility(View.GONE);
                                 recvout.setVisibility(View.GONE);
                             }
@@ -278,27 +283,21 @@ public class ModelActivity extends AppCompatActivity {
                 });
             }
         };
-        mRecognizer.connectService();
-        mRecognizer.registerListener(mListener);
-    }
 
+        sound_switch = (Switch) findViewById(R.id.sound_switch);
+        sound_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (sound_switch.isChecked()) {
+                    mRecognizer.connectService();
+                    mRecognizer.registerListener(mListener);
+                } else {
+                    mRecognizer.unregisterListener(mListener);
+                    mRecognizer.disconnectService();
+                }
+            }
+        });
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mRecognizer.registerListener(mListener);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mRecognizer.unregisterListener(mListener);
-    }
-
-    @Override
-    protected void onDestroy() {
-        mRecognizer.disconnectService();
-        super.onDestroy();
     }
 
     private void thread_start() {

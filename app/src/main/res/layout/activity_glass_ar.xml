@@ -258,6 +258,15 @@
                 android:layout_toEndOf="@+id/ARLayout"
                 android:layout_weight="0"></FrameLayout>
 
+            <Switch
+                android:id="@+id/ar_sound_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/glParentRelLayout"
+                android:layout_toStartOf="@+id/buttonA"
+                android:layout_weight="0"
+                android:text="Sound" />
+
         </LinearLayout>
 
     </RelativeLayout>

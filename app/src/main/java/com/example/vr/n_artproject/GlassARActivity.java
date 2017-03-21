@@ -16,9 +16,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +60,8 @@ public class GlassARActivity extends ARActivity {
     private TextView logMes;
 
     public Button sockConn;
+
+    private Switch ar_sound_switch;
 
     //Numbers and data
     private boolean GL_TRANSLUCENT = true;
@@ -193,36 +197,19 @@ public class GlassARActivity extends ARActivity {
             }
         };
 
-        mRecognizer.connectService();
-        mRecognizer.registerListener(mListener);
-    }
-
-    @Override
-    protected void onPause() {
-        mRecognizer.unregisterListener(mListener);
-        mRecognizer.disconnectService();
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        mRecognizer.connectService();
-        mRecognizer.registerListener(mListener);
-        super.onResume();
-    }
-
-    @Override
-    public void onStop() {
-        mRecognizer.unregisterListener(mListener);
-        mRecognizer.disconnectService();
-        super.onStop();
-    }
-
-    @Override
-    protected void onStart() {
-        mRecognizer.connectService();
-        mRecognizer.registerListener(mListener);
-        super.onStart();
+        ar_sound_switch = (Switch) findViewById(R.id.ar_sound_switch);
+        ar_sound_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (ar_sound_switch.isChecked()) {
+                    mRecognizer.connectService();
+                    mRecognizer.registerListener(mListener);
+                } else {
+                    mRecognizer.unregisterListener(mListener);
+                    mRecognizer.disconnectService();
+                }
+            }
+        });
     }
 
     @Override
